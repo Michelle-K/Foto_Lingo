@@ -1,40 +1,58 @@
-import React, { Component } from 'react';
-import {  View, Image } from 'react-native';
-import * as Animatable from 'react-native-animatable';
-import Camera from '../assets/images/camera.png';
+import React from 'react'
 
+import {
+  View,
+  Text,
+  StyleSheet,
+  CameraRoll,
+  Image,
+  Dimensions,
+  RefreshControl
+} from 'react-native'
 
-class ViewImage extends Component {
+let styles
+const { width } = Dimensions.get('window')
 
+class App extends React.Component {
 
-  nextPage() {
-    this.props.navigator.push({
-      id: 8
-    });
+  state = {
+    photos: []
+  }
+
+  getPhotos = () => {
+    CameraRoll.getPhotos({
+      first: 1,
+      assetType: 'All'
+    })
+    .then(r => this.setState({ photos: r.edges }))
   }
 
   render() {
+    console.log('state :', this.state)
     return (
-    <View style={styles.outterContainer}>
-      <Image
-  source={{uri: imageURI, isStatic:true}}
-  style={{width: 100, height: 100}}
-  />
-    </View>
-    );
+      <View style={styles.container}>
+        {this.state.photos.map((p, i) => {
+          return (
+            <Image
+              style={{
+                width: width/3,
+                height: width/3
+              }}
+                source={{uri: p.node.image.uri}}
+            />
+          )
+        })}
+      </View>
+    )
   }
 }
 
-const styles = {
-  outterContainer: {
+styles = StyleSheet.create({
+  container: {
     flex: 1,
-    backgroundColor: '#282828',
-    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center',
-    width: null,
-    height: null
+    alignItems: 'center'
   }
-};
+})
 
-export default ViewImage;
+export default App
