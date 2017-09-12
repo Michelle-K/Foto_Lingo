@@ -10,34 +10,48 @@ import {
 import Camera from 'react-native-camera';
 
 class CameraScreen extends Component {
+  constructor(props) {
+   super(props);
+   this.state = { photoTaken: false, photoData: [] };
+ }
+
   takePicture() {
     const options = {};
     //options.location = ...
     this.camera.capture({ metadata: options })
-      .then((data) => console.log(data))
+      .then((data) => this.setState({ photoData: data }))
       .catch(err => console.error(err));
-      this.props.navigator.push({
-        id: 7
-      });
+      this.setState({ photoTaken: true });
+      //this.props.navigator.push({
+        //id: 7
+      //});
   }
 
   render() {
+    if (!this.state.photoTaken) {
+      return (
+        <View style={styles.container}>
+          <Camera
+            ref={(cam) => {
+              this.camera = cam;
+            }}
+            captureTarget={Camera.constants.CaptureTarget.disk}
+            style={styles.preview}
+            aspect={Camera.constants.Aspect.fill}
+          >
+            <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
+          </Camera>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
-        <Camera
-          ref={(cam) => {
-            this.camera = cam;
-          }}
-          captureTarget={Camera.constants.CaptureTarget.disk}
-          style={styles.preview}
-          aspect={Camera.constants.Aspect.fill}
-        >
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
-        </Camera>
+        {this.state.data}
       </View>
-    );
-  }
-
+      );
+    }
+  
 }
 
 const styles = StyleSheet.create({
