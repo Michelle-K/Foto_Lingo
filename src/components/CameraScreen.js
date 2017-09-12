@@ -5,21 +5,21 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View
+  View,
+  Image,
+  Alert
 } from 'react-native';
 import Camera from 'react-native-camera';
+import Logo from '../assets/images/fotoLingoLogoW.png';
 
 class CameraScreen extends Component {
-  constructor(props) {
-   super(props);
-   this.state = { photoTaken: false, photoData: [] };
- }
+  state = { photoTaken: false, photoData: '' };
 
   takePicture() {
     const options = {};
     //options.location = ...
     this.camera.capture({ metadata: options })
-      .then((data) => this.setState({ photoData: data }))
+      .then((data) => console.log(data))
       .catch(err => console.error(err));
       this.setState({ photoTaken: true });
       //this.props.navigator.push({
@@ -47,11 +47,11 @@ class CameraScreen extends Component {
 
     return (
       <View style={styles.container}>
-        {this.state.data}
+        <Image source={Logo} />
       </View>
       );
     }
-  
+
 }
 
 const styles = StyleSheet.create({
