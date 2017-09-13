@@ -3,7 +3,7 @@ import { View, Dimensions, Text, Image, TouchableHighlight } from 'react-native'
 import * as Animatable from 'react-native-animatable';
 import Logo from '../assets/images/fotoLingoLogoW.png';
 import Forward from '../assets/images/forward.png';
-import Icon from 'react-native-vector-icons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 class Instructions extends Component {
 
@@ -29,10 +29,10 @@ class Instructions extends Component {
       style={styles.textBox}
     >
       <Text style={styles.header}>INSTRUCTIONS</Text>
-      <Icon name="camera" size={30} color="white" /><Text style={styles.instructions}>Take a photo</Text>
-      <Icon name="list-bullet" size={30} color="white" /><Text style={styles.instructions}>Pick a word</Text>
-      <Icon name="comment-account" size={30} color="white" /><Text style={styles.instructions}>See and hear it in spanish</Text>
-      <Icon name="playlist-check" size={30} color="white" /><Text style={styles.instructions}>See your collected words</Text>
+      <Icon name="camera-retro" size={30} color="white" /><Text style={styles.instructions}>Take a photo</Text>
+      <Icon name="list" size={30} color="white" /><Text style={styles.instructions}>Pick a word</Text>
+      <Icon name="comment" size={30} color="white" /><Text style={styles.instructions}>See and hear it in spanish</Text>
+      <Icon name="certificate" size={30} color="white" /><Text style={styles.instructions}>See your collected words</Text>
 
       <TouchableHighlight onPress={() => this.nextPageTakePhoto()}>
         <Image source={Forward} style={{ height: 40, width: 40 }} />
