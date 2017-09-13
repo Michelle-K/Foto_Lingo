@@ -4,7 +4,11 @@ import Icon from 'react-native-vector-icons';
 import * as Animatable from 'react-native-animatable';
 import Logo from '../assets/images/fotoLingoLogoW.png';
 import Forward from '../assets/images/forward.png';
+<<<<<<< HEAD
 
+=======
+import Icon from 'react-native-vector-icons/FontAwesome';
+>>>>>>> e6e62c8a8ec8364efdb36f8fbde7c7fdc346aca4
 
 class Instructions extends Component {
 
@@ -18,6 +22,7 @@ class Instructions extends Component {
     return (
       <View style={styles.outterContainer}>
 
+<<<<<<< HEAD
         <View style={styles.logoBox}>
           <Animatable.Image
             source={Logo}
@@ -39,6 +44,24 @@ class Instructions extends Component {
           <Icon name="list-bullet" size={30} color="white" /><Text style={styles.instructions}>Pick a word</Text>
           <Icon name="comment-account" size={30} color="white" /><Text style={styles.instructions}>See and hear it in spanish</Text>
           <Icon name="playlist-check" size={30} color="white" /><Text style={styles.instructions}>See your collected words</Text> */}
+=======
+    <View style={styles.logoBox}>
+      <Animatable.Image
+        source={Logo}
+        animation="pulse" easing="ease-out" iterationCount="infinite"
+        style={styles.logo}
+      />
+    </View>
+    <Animatable.View
+      animation="slideInUp" duration={3000} interationCount={1}
+      style={styles.textBox}
+    >
+      <Text style={styles.header}>INSTRUCTIONS</Text>
+      <Icon name="camera-retro" size={30} color="white" /><Text style={styles.instructions}>Take a photo</Text>
+      <Icon name="list" size={30} color="white" /><Text style={styles.instructions}>Pick a word</Text>
+      <Icon name="comment" size={30} color="white" /><Text style={styles.instructions}>See and hear it in spanish</Text>
+      <Icon name="certificate" size={30} color="white" /><Text style={styles.instructions}>See your collected words</Text>
+>>>>>>> e6e62c8a8ec8364efdb36f8fbde7c7fdc346aca4
 
           <TouchableHighlight onPress={() => this.nextPageTakePhoto()}>
             <Image source={Forward} style={{ height: 40, width: 40 }} />
