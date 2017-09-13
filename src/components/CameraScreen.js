@@ -19,23 +19,26 @@ class CameraScreen extends Component {
     const options = {};
     //options.location = ...
     this.camera.capture({ metadata: options })
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        this.props.navigator.push({
+          id: 7
+        });
+      })
       .catch(err => console.error(err));
       this.setState({ photoTaken: true });
-      //this.props.navigator.push({
-        //id: 7
-      //});
+
+
   }
 
   render() {
-    if (!this.state.photoTaken) {
       return (
         <View style={styles.container}>
           <Camera
             ref={(cam) => {
               this.camera = cam;
             }}
-            captureTarget={Camera.constants.CaptureTarget.disk}
+            //captureTarget={Camera.constants.CaptureTarget.disk}
             style={styles.preview}
             aspect={Camera.constants.Aspect.fill}
           >
@@ -44,20 +47,12 @@ class CameraScreen extends Component {
         </View>
       );
     }
-
-    return (
-      <View style={styles.container}>
-        <Image source={Logo} />
-      </View>
-      );
-    }
-
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   preview: {
     flex: 1,

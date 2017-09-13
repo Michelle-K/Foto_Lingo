@@ -1,58 +1,46 @@
-import React from 'react'
+import React, { Component } from 'react';
+import { Image } from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import Logo from '../assets/images/fotoLingoLogoW.png';
+import BGgif from '../assets/images/circleSplash.gif';
 
-import {
-  View,
-  Text,
-  StyleSheet,
-  CameraRoll,
-  Image,
-  Dimensions,
-  RefreshControl
-} from 'react-native'
-
-let styles
-const { width } = Dimensions.get('window')
-
-class App extends React.Component {
-
-  state = {
-    photos: []
+class ViewImage extends Component {
+  componentDidMount() {
+    setTimeout(() => this.nextPage(), 5000);
   }
 
-  getPhotos = () => {
-    CameraRoll.getPhotos({
-      first: 1,
-      assetType: 'All'
-    })
-    .then(r => this.setState({ photos: r.edges }))
+  nextPage() {
+    this.props.navigator.push({
+      id: 2
+    });
   }
 
   render() {
-    console.log('state :', this.state)
     return (
-      <View style={styles.container}>
-        {this.state.photos.map((p, i) => {
-          return (
-            <Image
-              style={{
-                width: width/3,
-                height: width/3
-              }}
-                source={{uri: p.node.image.uri}}
-            />
-          )
-        })}
-      </View>
-    )
+    <Image source={BGgif} style={styles.outterContainer}>
+      <Animatable.Image
+        source={Logo}
+        animation="zoomIn" style={styles.logo}
+      />
+    </Image>
+    );
   }
 }
 
-styles = StyleSheet.create({
-  container: {
+const styles = {
+  outterContainer: {
     flex: 1,
+    backgroundColor: '#DEDBD2',
+    flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: null,
+    height: null
+  },
+  logo: {
+    height: 200,
+    width: 200
   }
-})
+};
 
-export default App
+export default ViewImage;
